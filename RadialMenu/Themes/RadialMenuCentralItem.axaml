@@ -1,0 +1,65 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:RadialMenu.Controls">
+
+    <!-- RadialMenuCentralItem style when overed -->
+    <Style Selector="Controls|RadialMenuCentralItem:pointerover">
+        <Setter Property="BorderBrush" Value="#999" />
+        <Setter Property="Panel.ZIndex" Value="10" />
+    </Style>
+
+    <!-- RadialMenuCentralItem style when pressed -->
+    <Style Selector="Controls|RadialMenuCentralItem[IsPressed=True]">
+        <Setter Property="BorderBrush" Value="#666" />
+        <Setter Property="Panel.ZIndex" Value="10" />
+    </Style>
+
+    <!-- RadialMenuCentralItem style when disabled -->
+    <Style Selector="Controls|RadialMenuCentralItem[IsEnabled=False]">
+        <Setter Property="BorderBrush" Value="#F3F3F3" />
+        <Setter Property="Foreground" Value="#AFAFAF" />
+    </Style>
+
+    <Style Selector="Controls|RadialMenuCentralItem">
+
+
+        <!-- Default RadialMenuCentralItem style -->
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#111" />
+        <Setter Property="BorderBrush" Value="#CCC" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Panel.ZIndex" Value="0" />
+
+        <!-- RadialMenuCentralItem template -->
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="Controls:RadialMenuCentralItem">
+                    <Grid>
+
+                        <!-- Rounded button -->
+                        <Ellipse
+                            Stroke="{TemplateBinding BorderBrush}"
+                            StrokeThickness="{Binding BorderThickness.Top, RelativeSource={RelativeSource AncestorType=Controls:RadialMenuCentralItem}}"
+                            Fill="{TemplateBinding Background}" />
+
+                        <!-- Content -->
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+
+                    </Grid>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+</Styles>

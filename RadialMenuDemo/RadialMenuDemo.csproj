@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Remove=".gitignore" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="0.10.15" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.15" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.15" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.15" />
+        <PackageReference Include="Material.Icons.Avalonia" Version="1.0.2" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\RadialMenu\RadialMenu.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Utils\Icons.xaml" />
+    </ItemGroup>
+    <ItemGroup>
+      <AvaloniaXaml Update="Utils\Icons.axaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaXaml>
+    </ItemGroup>
+</Project>

@@ -1,0 +1,78 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:RadialMenu.Controls">
+
+    <Style Selector="Controls|RadialMenu">
+        
+        <!-- RadialMenu template -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:RadialMenu">
+                    <Grid>
+
+                        <!-- RadialMenu background -->
+                        <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}"
+                                 Height="{TemplateBinding Height}" />
+
+                        <!-- Content repitition (for items around) -->
+                        <ItemsControl Items="{TemplateBinding Content}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                        <!-- Content (for central item) -->
+                        <ContentPresenter Content="{TemplateBinding CentralItem}" />
+
+                    </Grid>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style Selector="Controls|RadialMenu[IsOpen=true]">
+        <Setter Property="IsVisible" Value="True"></Setter>
+        <Setter Property="Opacity" Value="1.0"></Setter>
+        <Style.Animations>
+            <Animation Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0.0"/>
+                    <Setter Property="RotateTransform.Angle" Value="-50"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.5"></Setter>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.5"></Setter>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1.0"/>
+                    <Setter Property="RotateTransform.Angle" Value="0.0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"></Setter>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"></Setter>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="Controls|RadialMenu[IsOpen=false]">
+        <Setter Property="Opacity" Value="0.0"></Setter>
+        <Style.Animations>
+            <Animation Duration="0:0:0.5">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="1.0"/>
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"></Setter>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"></Setter>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="0.0"/>
+                    <Setter Property="RotateTransform.Angle" Value="-50.0"/>
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.5"></Setter>
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.5"></Setter>
+                    <Setter Property="IsVisible" Value="False"></Setter>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+</Styles>

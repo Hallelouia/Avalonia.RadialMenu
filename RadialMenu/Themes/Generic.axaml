@@ -1,0 +1,7 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StyleInclude Source="avares://RadialMenu/Themes/PieShape.axaml"></StyleInclude>
+    <StyleInclude Source="avares://RadialMenu/Themes/RadialMenu.axaml"></StyleInclude>
+    <StyleInclude Source="avares://RadialMenu/Themes/RadialMenuItem.axaml"></StyleInclude>
+    <StyleInclude Source="avares://RadialMenu/Themes/RadialMenuCentralItem.axaml"></StyleInclude>
+</Styles>
