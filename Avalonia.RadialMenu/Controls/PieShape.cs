@@ -4,7 +4,7 @@ using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Styling;
 
-namespace RadialMenu.Controls;
+namespace Avalonia.RadialMenu.Controls;
 
 internal class PieShape : Shape
 {

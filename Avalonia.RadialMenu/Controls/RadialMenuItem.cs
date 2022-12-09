@@ -4,7 +4,7 @@ using Avalonia.Data;
 using Avalonia.Media;
 using Avalonia.Styling;
 
-namespace RadialMenu.Controls;
+namespace Avalonia.RadialMenu.Controls;
 
 /// <summary>
 /// Interaction logic for RadialMenuItem.xaml

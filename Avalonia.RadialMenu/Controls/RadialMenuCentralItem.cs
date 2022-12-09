@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Styling;
 
-namespace RadialMenu.Controls;
+namespace Avalonia.RadialMenu.Controls;
 
 /// <summary>
 /// Interaction logic for RadialMenuCentralItem.xaml

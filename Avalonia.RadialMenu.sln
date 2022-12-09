@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadialMenu", "RadialMenu\RadialMenu.csproj", "{0D80223B-A2E6-4FAF-8753-09BDE5DB9FC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.RadialMenu", "Avalonia.RadialMenu\Avalonia.RadialMenu.csproj", "{0D80223B-A2E6-4FAF-8753-09BDE5DB9FC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadialMenuDemo", "RadialMenuDemo\RadialMenuDemo.csproj", "{89727669-7EBE-4F13-9C25-6108F8E0A656}"
 EndProject

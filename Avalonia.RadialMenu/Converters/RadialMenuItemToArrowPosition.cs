@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Data.Converters;
 
-namespace RadialMenu.Converters
+namespace Avalonia.RadialMenu.Converters
 {
     internal class RadialMenuItemToArrowPosition : IMultiValueConverter
     {

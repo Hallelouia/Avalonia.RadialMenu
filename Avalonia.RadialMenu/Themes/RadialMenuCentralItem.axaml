@@ -1,7 +1,7 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Controls="clr-namespace:RadialMenu.Controls">
+    xmlns:Controls="clr-namespace:Avalonia.RadialMenu.Controls">
 
     <!-- RadialMenuCentralItem style when overed -->
     <Style Selector="Controls|RadialMenuCentralItem:pointerover">

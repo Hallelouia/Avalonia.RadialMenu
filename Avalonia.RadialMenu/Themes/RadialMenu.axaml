@@ -1,6 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Controls="clr-namespace:RadialMenu.Controls">
+        xmlns:Controls="clr-namespace:Avalonia.RadialMenu.Controls">
 
     <Style Selector="Controls|RadialMenu">
         
@@ -14,7 +14,7 @@
                         <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}"
                                  Height="{TemplateBinding Height}" />
 
-                        <!-- Content repitition (for items around) -->
+                        <!-- Content repetition (for items around) -->
                         <ItemsControl Items="{TemplateBinding Content}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -33,7 +33,7 @@
         </Setter>
 
     </Style>
-
+    
     <Style Selector="Controls|RadialMenu[IsOpen=true]">
         <Setter Property="IsVisible" Value="True"></Setter>
         <Setter Property="Opacity" Value="1.0"></Setter>
@@ -54,7 +54,7 @@
             </Animation>
         </Style.Animations>
     </Style>
-
+    
     <Style Selector="Controls|RadialMenu[IsOpen=false]">
         <Setter Property="Opacity" Value="0.0"></Setter>
         <Style.Animations>

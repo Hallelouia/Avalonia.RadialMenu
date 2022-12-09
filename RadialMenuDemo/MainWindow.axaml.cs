@@ -1,51 +1,59 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reactive;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using RadialMenu.Controls;
-using ReactiveUI;
-using Brush = Avalonia.Media.Brush;
-using Brushes = Avalonia.Media.Brushes;
-using Color = System.Drawing.Color;
+using Avalonia.RadialMenu.Controls;
 
-namespace RadialMenuDemo
+namespace RadialMenuDemo;
+
+public partial class MainWindow : Window, INotifyPropertyChanged
 {
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    private readonly MainViewModel _mvm;
+    private readonly RadialMenu _r;
+    private readonly Canvas _c;
+
+    public MainWindow()
     {
-        private readonly MainViewModel _mvm;
-        
-        public MainWindow()
-        {
-            InitializeComponent();
+        InitializeComponent();
 #if DEBUG
-            this.AttachDevTools();
+        this.AttachDevTools();
 #endif
-            _mvm = new MainViewModel();
-            
-            DataContext = _mvm;
-        }
+        _r = this.FindControl<RadialMenu>("radialMenu");
+        _c = this.FindControl<Canvas>("canvas");
+
+        _mvm = new MainViewModel();
+        DataContext = _mvm;
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+    
+    private Point GetCenterOfRadialMenu(Point p)
+    {
+        if (_r.Content is null || _r.Content.Count == 0)
+            throw new Exception("Invalid: RadialMenu has 0 Items, Add Items to RadialMenu then try again");
         
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        var rad = _r.Content[0].OuterRadius;
+        return new Point(p.X - rad, p.Y - rad);
+    }
+
+    private void Canvas_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var c = sender as Canvas;
+        var cur_point = e.GetCurrentPoint(c);
         
-        protected override void OnPointerPressed(PointerPressedEventArgs e)
+        if (cur_point.Properties.IsRightButtonPressed && !_mvm.IsOpen)
         {
-            base.OnPointerPressed(e);
-            if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed  && !_mvm.IsOpen)
-            {
-                _mvm.OpenMenu();
-            }
+            _mvm.Location = GetCenterOfRadialMenu(cur_point.Position);
+            _mvm.IsOpen = true;
+        }
+        else if (e.GetCurrentPoint(_c).Properties.IsLeftButtonPressed && _mvm.IsOpen)
+        {
+            _mvm.IsOpen = false;
         }
     }
 }

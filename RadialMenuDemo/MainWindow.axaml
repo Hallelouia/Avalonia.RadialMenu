@@ -2,13 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:RadialMenu="clr-namespace:RadialMenu.Controls;assembly=RadialMenu"
+        xmlns:RadialMenu="clr-namespace:Avalonia.RadialMenu.Controls;assembly=Avalonia.RadialMenu"
         xmlns:radialMenuDemo="clr-namespace:RadialMenuDemo"
         xmlns:material="using:Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RadialMenuDemo.MainWindow"
-        Title="RadialMenuDemo"
-        d:DataContext="{d:DesignInstance radialMenuDemo:MainViewModel}">
+        Title="RadialMenuDemo">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -24,17 +23,25 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <WrapPanel HorizontalAlignment="Center">
-                <Button Content="Open" Command="{Binding OpenMenu}" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Padding="40 10" Margin="10" />
-                <Button Content="Close" Command="{Binding CloseMenu}" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Padding="40 10" Margin="10" />
-            </WrapPanel>
-        </Grid>
+        <WrapPanel HorizontalAlignment="Center" Grid.Row="0">
+            <Button Content="Open" Command="{Binding OpenMenu}" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Padding="40 10" Margin="10" />
+            <Button Content="Close" Command="{Binding CloseMenu}" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Padding="40 10" Margin="10" />
+            <CheckBox Content="Shift Items" Padding="40 10" Margin="10" IsChecked="{Binding IsShifted}"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+            </CheckBox>
+            <Label Content="Last Piece Pressed" Padding="40 10" Margin="10"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            </Label>
+            <Label Content="{Binding LastPressed}" Padding="40 10" Margin="10"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            </Label>
+        </WrapPanel>
 
-        <Grid Grid.Row="1">
-            <RadialMenu:RadialMenu Name="RadialMenu" IsOpen="{Binding IsOpen}">
+        <Canvas x:Name="canvas" Grid.Row="1" PointerPressed="Canvas_OnPointerPressed" Background="Transparent">
+            <RadialMenu:RadialMenu HalfShiftedItems="{Binding IsShifted}" Canvas.Top="{Binding Location.Y}"
+                                   Canvas.Left="{Binding Location.X}" x:Name="radialMenu" IsOpen="{Binding IsOpen}">
 
                 <RadialMenu:RadialMenu.CentralItem>
                     <RadialMenu:RadialMenuCentralItem Command="{Binding CloseMenu}"
@@ -44,7 +51,7 @@
 
                 <RadialMenu:RadialMenu.Content>
 
-                    <RadialMenu:RadialMenuItem>
+                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="1">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <material:MaterialIcon Kind="Add"></material:MaterialIcon>
                             <TextBlock FontSize="14" TextAlignment="Center">
@@ -53,7 +60,7 @@
                         </WrapPanel>
                     </RadialMenu:RadialMenuItem>
 
-                    <RadialMenu:RadialMenuItem>
+                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="2">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <material:MaterialIcon Kind="Edit"></material:MaterialIcon>
                             <TextBlock FontSize="14" TextAlignment="Center">
@@ -62,7 +69,7 @@
                         </WrapPanel>
                     </RadialMenu:RadialMenuItem>
 
-                    <RadialMenu:RadialMenuItem>
+                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="3">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <material:MaterialIcon Kind="ContentSave"></material:MaterialIcon>
                             <TextBlock FontSize="14" TextAlignment="Center">
@@ -71,7 +78,7 @@
                         </WrapPanel>
                     </RadialMenu:RadialMenuItem>
 
-                    <RadialMenu:RadialMenuItem>
+                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="4">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <material:MaterialIcon Kind="Delete"></material:MaterialIcon>
                             <TextBlock FontSize="14" TextAlignment="Center">
@@ -80,7 +87,7 @@
                         </WrapPanel>
                     </RadialMenu:RadialMenuItem>
 
-                    <RadialMenu:RadialMenuItem>
+                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="5">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <material:MaterialIcon Kind="FilePlus"></material:MaterialIcon>
                             <TextBlock FontSize="14" TextAlignment="Center">
@@ -89,7 +96,7 @@
                         </WrapPanel>
                     </RadialMenu:RadialMenuItem>
 
-                    <RadialMenu:RadialMenuItem IsEnabled="False">
+                    <RadialMenu:RadialMenuItem IsEnabled="False" Command="{Binding Pressed}" CommandParameter="6">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <material:MaterialIcon Kind="Share"></material:MaterialIcon>
                             <TextBlock FontSize="14" TextAlignment="Center">
@@ -101,104 +108,8 @@
                 </RadialMenu:RadialMenu.Content>
 
             </RadialMenu:RadialMenu>
-        </Grid>
-        <!-- -->
-        <!-- <Grid Grid.Row="1"> -->
-        <!--     <RadialMenu:RadialMenu IsOpen="{Binding IsOpen2}" HalfShiftedItems="True"> -->
-        <!-- -->
-        <!--         <RadialMenu:RadialMenu.CentralItem> -->
-        <!--             <RadialMenu:RadialMenuCentralItem Command="{Binding CloseRadialMenu2}"> -->
-        <!--                 <Rectangle Width="25" Height="25"> -->
-        <!--                     <Rectangle.Fill> -->
-        <!--                         <VisualBrush Visual="{StaticResource appbar_close}" /> -->
-        <!--                     </Rectangle.Fill> -->
-        <!--                 </Rectangle> -->
-        <!--             </RadialMenu:RadialMenuCentralItem> -->
-        <!--         </RadialMenu:RadialMenu.CentralItem> -->
-        <!--         <RadialMenu:RadialMenu.Content> -->
-        <!-- -->
-        <!--             <RadialMenu:RadialMenuItem Command="{Binding Test1}"> -->
-        <!--                 <WrapPanel Orientation="Vertical"> -->
-        <!--                     <Rectangle Width="25" Height="25"> -->
-        <!--                         <Rectangle.Fill> -->
-        <!--                             <VisualBrush Visual="{StaticResource appbar_add}" /> -->
-        <!--                         </Rectangle.Fill> -->
-        <!--                     </Rectangle> -->
-        <!--                     <TextBlock FontSize="14" TextAlignment="Center"> -->
-        <!--                         Ajouter -->
-        <!--                     </TextBlock> -->
-        <!--                 </WrapPanel> -->
-        <!--             </RadialMenu:RadialMenuItem> -->
-        <!-- -->
-        <!--             <RadialMenu:RadialMenuItem Command="{Binding Test2}"> -->
-        <!--                 <WrapPanel Orientation="Vertical"> -->
-        <!--                     <Rectangle Width="25" Height="25"> -->
-        <!--                         <Rectangle.Fill> -->
-        <!--                             <VisualBrush Visual="{StaticResource appbar_edit}" /> -->
-        <!--                         </Rectangle.Fill> -->
-        <!--                     </Rectangle> -->
-        <!--                     <TextBlock FontSize="14" TextAlignment="Center"> -->
-        <!--                         Édition -->
-        <!--                     </TextBlock> -->
-        <!--                 </WrapPanel> -->
-        <!--             </RadialMenu:RadialMenuItem> -->
-        <!-- -->
-        <!--             <RadialMenu:RadialMenuItem Command="{Binding Test3}"> -->
-        <!--                 <WrapPanel Orientation="Vertical"> -->
-        <!--                     <Rectangle Width="23" Height="25"> -->
-        <!--                         <Rectangle.Fill> -->
-        <!--                             <VisualBrush Visual="{StaticResource appbar_save}" /> -->
-        <!--                         </Rectangle.Fill> -->
-        <!--                     </Rectangle> -->
-        <!--                     <TextBlock FontSize="14" TextAlignment="Center"> -->
-        <!--                         Sauvegarder -->
-        <!--                     </TextBlock> -->
-        <!--                 </WrapPanel> -->
-        <!--             </RadialMenu:RadialMenuItem> -->
-        <!-- -->
-        <!--             <RadialMenu:RadialMenuItem Command="{Binding Test4}"> -->
-        <!--                 <WrapPanel Orientation="Vertical"> -->
-        <!--                     <Rectangle Width="20" Height="25"> -->
-        <!--                         <Rectangle.Fill> -->
-        <!--                             <VisualBrush Visual="{StaticResource appbar_delete}" /> -->
-        <!--                         </Rectangle.Fill> -->
-        <!--                     </Rectangle> -->
-        <!--                     <TextBlock FontSize="14" TextAlignment="Center"> -->
-        <!--                         Supprimer -->
-        <!--                     </TextBlock> -->
-        <!--                 </WrapPanel> -->
-        <!--             </RadialMenu:RadialMenuItem> -->
-        <!-- -->
-        <!--             <RadialMenu:RadialMenuItem Command="{Binding Test5}"> -->
-        <!--                 <WrapPanel Orientation="Vertical"> -->
-        <!--                     <Rectangle Width="20" Height="25"> -->
-        <!--                         <Rectangle.Fill> -->
-        <!--                             <VisualBrush Visual="{StaticResource appbar_page}" /> -->
-        <!--                         </Rectangle.Fill> -->
-        <!--                     </Rectangle> -->
-        <!--                     <TextBlock FontSize="14" TextAlignment="Center"> -->
-        <!--                         Nouvelle page -->
-        <!--                     </TextBlock> -->
-        <!--                 </WrapPanel> -->
-        <!--             </RadialMenu:RadialMenuItem> -->
-        <!-- -->
-        <!--             <RadialMenu:RadialMenuItem Command="{Binding Test6}"> -->
-        <!--                 <WrapPanel Orientation="Vertical"> -->
-        <!--                     <Rectangle Width="19" Height="26"> -->
-        <!--                         <Rectangle.Fill> -->
-        <!--                             <VisualBrush Visual="{StaticResource appbar_upload}" /> -->
-        <!--                         </Rectangle.Fill> -->
-        <!--                     </Rectangle> -->
-        <!--                     <TextBlock FontSize="14" TextAlignment="Center"> -->
-        <!--                         Partager -->
-        <!--                     </TextBlock> -->
-        <!--                 </WrapPanel> -->
-        <!--             </RadialMenu:RadialMenuItem> -->
-        <!--         </RadialMenu:RadialMenu.Content> -->
-        <!-- -->
-        <!--     </RadialMenu:RadialMenu> -->
-        <!-- </Grid> -->
-    </Grid>
 
+        </Canvas>
+    </Grid>
 
 </Window>

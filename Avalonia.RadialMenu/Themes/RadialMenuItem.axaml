@@ -1,8 +1,8 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Controls="clr-namespace:RadialMenu.Controls"
-    xmlns:Converters="clr-namespace:RadialMenu.Converters">
+    xmlns:Controls="clr-namespace:Avalonia.RadialMenu.Controls"
+    xmlns:Converters="clr-namespace:Avalonia.RadialMenu.Converters">
 
     <Styles.Resources>
         <Converters:RadialMenuItemToContentPosition x:Key="RadialMenuItemToContentPosition" />
