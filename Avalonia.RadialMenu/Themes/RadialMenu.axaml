@@ -15,12 +15,13 @@
                                  Height="{TemplateBinding Height}" />
 
                         <!-- Content repetition (for items around) -->
-                        <ItemsControl Items="{TemplateBinding Content}">
+                        <ItemsControl ItemsSource="{TemplateBinding MenuContent}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <Grid />
+                                    <Grid/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+
                         </ItemsControl>
 
                         <!-- Content (for central item) -->
@@ -38,7 +39,7 @@
         <Setter Property="IsVisible" Value="True"></Setter>
         <Setter Property="Opacity" Value="1.0"></Setter>
         <Style.Animations>
-            <Animation Duration="0:0:0.5">
+            <Animation Duration="0:0:0.2">
                 <KeyFrame Cue="0%">
                     <Setter Property="Opacity" Value="0.0"/>
                     <Setter Property="RotateTransform.Angle" Value="-50"/>
@@ -58,7 +59,7 @@
     <Style Selector="Controls|RadialMenu[IsOpen=false]">
         <Setter Property="Opacity" Value="0.0"></Setter>
         <Style.Animations>
-            <Animation Duration="0:0:0.5">
+            <Animation Duration="0:0:0.2">
                 <KeyFrame Cue="0%">
                     <Setter Property="Opacity" Value="1.0"/>
                     <Setter Property="RotateTransform.Angle" Value="0"/>

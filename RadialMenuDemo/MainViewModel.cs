@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Input;
 using ReactiveUI;
 
@@ -10,6 +12,11 @@ namespace RadialMenuDemo;
 
 public class MainViewModel : ReactiveObject
 {
+    List<Button> _buttons = new List<Button>() { new Button() {Content = "A"}, new Button() {Content = "A"}, new Button() {Content = "A"}, new Button() {Content = "A"}, new Button() {Content = "A"}, };
+
+    
+    List<Button> Buttons => _buttons;
+
     private ReactiveCommand<Unit, Unit> CloseRadialMenu { get; }
     private ReactiveCommand<Unit, Unit> OpenRadialMenu { get; }
 
@@ -40,7 +47,7 @@ public class MainViewModel : ReactiveObject
 
     private string _lastPressed;
 
-    public string LastPressed
+    private string LastPressed
     {
         get => _lastPressed;
         set => this.RaiseAndSetIfChanged(ref _lastPressed, value);
@@ -52,6 +59,8 @@ public class MainViewModel : ReactiveObject
         CloseRadialMenu = ReactiveCommand.Create(CloseMenu);
 
         Pressed = ReactiveCommand.Create<string>(WritePieceNb);
+
+        _lastPressed = "None";
     }
 
     public void OpenMenu()

@@ -106,7 +106,7 @@ internal class PieShape : Shape
 
     static PieShape()
     {
-        AffectsGeometry<PieShape>(StartAngleProperty, AngleDeltaProperty, PaddingProperty, CenterXProperty, CenterYProperty, InnerRadiusProperty, OuterRadiusProperty, PushOutProperty, HeightProperty, WidthProperty);
+        AffectsGeometry<PieShape>(StartAngleProperty, AngleDeltaProperty, PaddingProperty, CenterXProperty, CenterYProperty, InnerRadiusProperty, OuterRadiusProperty, PushOutProperty, HeightProperty);
     }
 
     /// <summary>

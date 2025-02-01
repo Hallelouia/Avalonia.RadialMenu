@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Styling;
 
 namespace Avalonia.RadialMenu.Controls;
@@ -31,12 +32,12 @@ namespace Avalonia.RadialMenu.Controls;
             set => SetValue(CentralItemProperty, value);
         }
         
-        public new static readonly StyledProperty<List<RadialMenuItem>?> ContentProperty =
-            AvaloniaProperty.Register<RadialMenu, List<RadialMenuItem>?>(nameof(Content), null);
-        public new List<RadialMenuItem>? Content
+        public static readonly StyledProperty<List<RadialMenuItem>?> MenuContentProperty =
+            AvaloniaProperty.Register<RadialMenu, List<RadialMenuItem>?>(nameof(MenuContent), null);
+        public List<RadialMenuItem>? MenuContent
         {
-            get => GetValue(ContentProperty);
-            set => SetValue(ContentProperty, value);
+            get => GetValue(MenuContentProperty);
+            set => SetValue(MenuContentProperty, value);
         }
 
         static RadialMenu()
@@ -45,18 +46,18 @@ namespace Avalonia.RadialMenu.Controls;
 
         public override void BeginInit()
         {
-            Content = new List<RadialMenuItem>();
+            MenuContent = new List<RadialMenuItem>();
             base.BeginInit();
         }
 
-        protected override Size ArrangeOverride(Size arrangeSize)
+        public override void Render(DrawingContext context)
         {
-            for (int i = 0, count = Content!.Count; i < count; i++)
+            for (int i = 0, count = MenuContent!.Count; i < count; i++)
             {
-                Content[i].Index = i;
-                Content[i].Count = count;
-                Content[i].HalfShifted = HalfShiftedItems;
+                MenuContent[i].Index = i;
+                MenuContent[i].Count = count;
+                MenuContent[i].HalfShifted = HalfShiftedItems;
             }
-            return base.ArrangeOverride(arrangeSize);
+            base.Render(context);
         }
     }

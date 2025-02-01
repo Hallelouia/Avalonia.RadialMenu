@@ -11,7 +11,7 @@
 
     <!-- RadialMenuItem style when overed -->
     <Style Selector="Controls|RadialMenuItem:pointerover">
-        <Setter Property="EdgeBackground" Value="#999" />
+        <Setter Property="EdgeBackground" Value="#909090" />
         <Setter Property="Panel.ZIndex" Value="10" />
     </Style>
 
