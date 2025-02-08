@@ -1,7 +1,7 @@
 <Style
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Controls="clr-namespace:Avalonia.RadialMenu.Controls" Selector="Controls|PieShape">
+    xmlns:controls="clr-namespace:Avalonia.RadialMenu.Controls" Selector="controls|PieShape">
 
 
 </Style>

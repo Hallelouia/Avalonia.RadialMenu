@@ -1,34 +1,34 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Controls="clr-namespace:Avalonia.RadialMenu.Controls"
-    xmlns:Converters="clr-namespace:Avalonia.RadialMenu.Converters">
+    xmlns:controls="clr-namespace:Avalonia.RadialMenu.Controls"
+    xmlns:converters="clr-namespace:Avalonia.RadialMenu.Converters">
 
     <Styles.Resources>
-        <Converters:RadialMenuItemToContentPosition x:Key="RadialMenuItemToContentPosition" />
-        <Converters:RadialMenuItemToArrowPosition x:Key="RadialMenuItemToArrowPosition" />
+        <converters:RadialMenuItemToContentPosition x:Key="RadialMenuItemToContentPosition" />
+        <converters:RadialMenuItemToArrowPosition x:Key="RadialMenuItemToArrowPosition" />
     </Styles.Resources>
 
     <!-- RadialMenuItem style when overed -->
-    <Style Selector="Controls|RadialMenuItem:pointerover">
+    <Style Selector="controls|RadialMenuItem:pointerover">
         <Setter Property="EdgeBackground" Value="#909090" />
-        <Setter Property="Panel.ZIndex" Value="10" />
+        <Setter Property="ZIndex" Value="10" />
     </Style>
 
     <!-- RadialMenuItem style when pressed -->
-    <Style Selector="Controls|RadialMenuItem[IsPressed=True]">
+    <Style Selector="controls|RadialMenuItem[IsPressed=True]">
         <Setter Property="EdgeBackground" Value="#666" />
-        <Setter Property="Panel.ZIndex" Value="10" />
+        <Setter Property="ZIndex" Value="10" />
     </Style>
 
     <!-- RadialMenuItem style when disabled -->
-    <Style Selector="Controls|RadialMenuItem[IsEnabled=False]">
+    <Style Selector="controls|RadialMenuItem[IsEnabled=False]">
         <Setter Property="Background" Value="#F3F3F3" />
         <Setter Property="Foreground" Value="#AFAFAF" />
     </Style>
 
 
-    <Style Selector="Controls|RadialMenuItem">
+    <Style Selector="controls|RadialMenuItem">
         <!-- Default RadialMenuItem style -->
         <Setter Property="Width" Value="300" />
         <Setter Property="Height" Value="300" />
@@ -52,24 +52,24 @@
         <!-- RadialMenuItem template -->
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Controls:RadialMenuItem">
+                <ControlTemplate TargetType="controls:RadialMenuItem">
                     <Canvas ZIndex="{TemplateBinding Panel.ZIndex}" Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}">
                         <!-- Main pie piece -->
-                        <Controls:PieShape
+                        <controls:PieShape
                             CenterX="{TemplateBinding CenterX}"
                             CenterY="{TemplateBinding CenterY}"
                             Padding="{TemplateBinding Padding}"
                             OuterRadius="{TemplateBinding OuterRadius}"
                             InnerRadius="{TemplateBinding InnerRadius}"
                             Fill="{TemplateBinding Background}"
-                            StrokeThickness="{Binding BorderThickness.Top, RelativeSource={RelativeSource AncestorType=Controls:RadialMenuItem}}"
+                            StrokeThickness="{Binding BorderThickness.Top, RelativeSource={RelativeSource AncestorType=controls:RadialMenuItem}}"
                             Stroke="{TemplateBinding BorderBrush}"
                             StartAngle="{TemplateBinding StartAngle}"
                             AngleDelta="{TemplateBinding AngleDelta}" />
 
                         <!-- Edge pie piece -->
-                        <Controls:PieShape
+                        <controls:PieShape
                             CenterX="{TemplateBinding CenterX}"
                             CenterY="{TemplateBinding CenterY}"
                             Padding="{TemplateBinding EdgePadding}"

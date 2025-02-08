@@ -231,22 +231,22 @@ public class RadialMenuItem : Button
 
     static RadialMenuItem()
     {
-        AffectsRender<RadialMenuItem>(IndexProperty);
-        AffectsRender<RadialMenuItem>(CountProperty);
-        AffectsRender<RadialMenuItem>(HalfShiftedProperty);
+        AffectsArrange<RadialMenuItem>(IndexProperty);
+        AffectsArrange<RadialMenuItem>(CountProperty);
+        AffectsArrange<RadialMenuItem>(HalfShiftedProperty);
     }
 
-    public override void Render(DrawingContext context)
+    protected override void ArrangeCore(Rect finalRect)
     {
-        var angleDelta = 360.0 / this.Count;
-        var angleShift = this.HalfShifted ? -angleDelta / 2 : 0;
-        var startAngle = angleDelta * this.Index + angleShift;
+        var angleDelta = 360.0 / Count;
+        var angleShift = HalfShifted ? -angleDelta / 2 : 0;
+        var startAngle = angleDelta * Index + angleShift;
         var rotation = startAngle + angleDelta / 2;
 
-        this.AngleDelta = angleDelta;
-        this.StartAngle = startAngle;
-        this.Rotation = rotation;
+        AngleDelta = angleDelta;
+        StartAngle = startAngle;
+        Rotation = rotation;
 
-        base.Render(context);
+        base.ArrangeCore(finalRect);
     }
 }

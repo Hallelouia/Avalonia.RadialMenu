@@ -1,18 +1,43 @@
-using Avalonia;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using Avalonia.Platform;
-using Avalonia.Styling;
 
 namespace Avalonia.RadialMenu.Controls;
 
 internal class PieShape : Shape
 {
     public static readonly StyledProperty<double> InnerRadiusProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(InnerRadius), 0);
+        AvaloniaProperty.Register<PieShape, double>(nameof(InnerRadius));
+
+    public static readonly StyledProperty<double> OuterRadiusProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(OuterRadius));
+
+    public static readonly StyledProperty<double> PaddingProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(Padding));
+
+    public static readonly StyledProperty<double> PushOutProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(PushOut));
+
+    public static readonly StyledProperty<double> AngleDeltaProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(AngleDelta));
+
+    public static readonly StyledProperty<double> StartAngleProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(StartAngle));
+
+    public static readonly StyledProperty<double> CenterXProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(CenterX));
+
+    public static readonly StyledProperty<double> CenterYProperty =
+        AvaloniaProperty.Register<PieShape, double>(nameof(CenterY));
+
+    static PieShape()
+    {
+        AffectsGeometry<PieShape>(StartAngleProperty, AngleDeltaProperty, PaddingProperty, CenterXProperty,
+            CenterYProperty, InnerRadiusProperty, OuterRadiusProperty, PushOutProperty, HeightProperty, WidthProperty);
+    }
 
     /// <summary>
-    /// The inner radius of this pie piece
+    ///     The inner radius of this pie piece
     /// </summary>
     public double InnerRadius
     {
@@ -20,11 +45,8 @@ internal class PieShape : Shape
         set => SetValue(InnerRadiusProperty, value);
     }
 
-    public static readonly StyledProperty<double> OuterRadiusProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(OuterRadius), 0);
-
     /// <summary>
-    /// The outer radius of this pie piece
+    ///     The outer radius of this pie piece
     /// </summary>
     public double OuterRadius
     {
@@ -32,11 +54,8 @@ internal class PieShape : Shape
         set => SetValue(OuterRadiusProperty, value);
     }
 
-    public static readonly StyledProperty<double> PaddingProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(Padding), 0);
-
     /// <summary>
-    /// The padding arround this pie piece
+    ///     The padding arround this pie piece
     /// </summary>
     public double Padding
     {
@@ -44,11 +63,8 @@ internal class PieShape : Shape
         set => SetValue(PaddingProperty, value);
     }
 
-    public static readonly StyledProperty<double> PushOutProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(PushOut), 0);
-
     /// <summary>
-    /// The distance to 'push' this pie piece out from the center
+    ///     The distance to 'push' this pie piece out from the center
     /// </summary>
     public double PushOut
     {
@@ -56,11 +72,8 @@ internal class PieShape : Shape
         set => SetValue(PushOutProperty, value);
     }
 
-    public static readonly StyledProperty<double> AngleDeltaProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(AngleDelta), 0);
-
     /// <summary>
-    /// The angle delta of this pie piece in degrees
+    ///     The angle delta of this pie piece in degrees
     /// </summary>
     public double AngleDelta
     {
@@ -68,11 +81,8 @@ internal class PieShape : Shape
         set => SetValue(AngleDeltaProperty, value);
     }
 
-    public static readonly StyledProperty<double> StartAngleProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(StartAngle), 0);
-
     /// <summary>
-    /// The start angle from the Y axis vector of this pie piece in degrees
+    ///     The start angle from the Y axis vector of this pie piece in degrees
     /// </summary>
     public double StartAngle
     {
@@ -80,11 +90,8 @@ internal class PieShape : Shape
         set => SetValue(StartAngleProperty, value);
     }
 
-    public static readonly StyledProperty<double> CenterXProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(CenterX), 0);
-
     /// <summary>
-    /// The X coordinate of center of the circle from which this pie piece is cut
+    ///     The X coordinate of center of the circle from which this pie piece is cut
     /// </summary>
     public double CenterX
     {
@@ -92,11 +99,8 @@ internal class PieShape : Shape
         set => SetValue(CenterXProperty, value);
     }
 
-    public static readonly StyledProperty<double> CenterYProperty =
-        AvaloniaProperty.Register<PieShape, double>(nameof(CenterY), 0);
-
     /// <summary>
-    /// The Y coordinate of center of the circle from which this pie piece is cut
+    ///     The Y coordinate of center of the circle from which this pie piece is cut
     /// </summary>
     public double CenterY
     {
@@ -104,13 +108,8 @@ internal class PieShape : Shape
         set => SetValue(CenterYProperty, value);
     }
 
-    static PieShape()
-    {
-        AffectsGeometry<PieShape>(StartAngleProperty, AngleDeltaProperty, PaddingProperty, CenterXProperty, CenterYProperty, InnerRadiusProperty, OuterRadiusProperty, PushOutProperty, HeightProperty, WidthProperty);
-    }
-
     /// <summary>
-    /// Defines the shape
+    ///     Defines the shape
     /// </summary>
     protected override Geometry? CreateDefiningGeometry()
     {
@@ -122,14 +121,11 @@ internal class PieShape : Shape
     }
 
     /// <summary>
-    /// Draws the pie piece
+    ///     Draws the pie piece
     /// </summary>
     private void DrawGeometry(IGeometryContext context)
     {
-        if (AngleDelta <= 0)
-        {
-            return;
-        }
+        if (AngleDelta <= 0) return;
 
         var outerStartAngle = StartAngle;
         var outerAngleDelta = AngleDelta;
@@ -163,8 +159,8 @@ internal class PieShape : Shape
             if (Padding > 0)
             {
                 // Offsets the angle by the padding
-                var outerAngleVariation = (180 * (Padding / OuterRadius)) / Math.PI;
-                var innerAngleVariation = (180 * (Padding / InnerRadius)) / Math.PI;
+                var outerAngleVariation = 180 * (Padding / OuterRadius) / Math.PI;
+                var innerAngleVariation = 180 * (Padding / InnerRadius) / Math.PI;
 
                 outerStartAngle += outerAngleVariation;
                 outerAngleDelta -= outerAngleVariation * 2;
@@ -193,7 +189,7 @@ internal class PieShape : Shape
     private static Point ComputeCartesianCoordinate(Point center, double angle, double radius)
     {
         // Converts to radians
-        var radiansAngle = (Math.PI / 180.0) * (angle - 90);
+        var radiansAngle = Math.PI / 180.0 * (angle - 90);
         var x = radius * Math.Cos(radiansAngle);
         var y = radius * Math.Sin(radiansAngle);
         return new Point(x + center.X, y + center.Y);

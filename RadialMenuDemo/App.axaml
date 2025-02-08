@@ -3,8 +3,9 @@
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="RadialMenuDemo.App">
     <Application.Styles>
-        <StyleInclude Source="avares://Avalonia.RadialMenu/Themes/Generic.axaml"></StyleInclude>
+        <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.RadialMenu/Themes/Generic.axaml" />
         <materialIcons:MaterialIconStyles />
     </Application.Styles>
-    
+
 </Application>

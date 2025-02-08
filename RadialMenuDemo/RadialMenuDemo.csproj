@@ -6,25 +6,27 @@
         <LangVersion>default</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <None Remove=".gitignore" />
+        <None Remove=".gitignore"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.2.3" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
-        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.3" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.3" />
-        <PackageReference Include="Material.Icons.Avalonia" Version="2.2.0" />
+        <PackageReference Include="Avalonia" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.3"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3"/>
+        <PackageReference Include="Live.Avalonia" Version="1.4.1"/>
+        <PackageReference Include="Material.Icons.Avalonia" Version="2.2.0"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Avalonia.RadialMenu\Avalonia.RadialMenu.csproj" />
+        <ProjectReference Include="..\Avalonia.RadialMenu\Avalonia.RadialMenu.csproj"/>
     </ItemGroup>
     <ItemGroup>
-      <None Remove="Utils\Icons.xaml" />
+        <None Remove="Utils\Icons.xaml"/>
     </ItemGroup>
     <ItemGroup>
-      <AvaloniaXaml Update="Utils\Icons.axaml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </AvaloniaXaml>
+        <AvaloniaXaml Update="Utils\Icons.axaml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </AvaloniaXaml>
     </ItemGroup>
 </Project>

@@ -2,10 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:RadialMenu="clr-namespace:Avalonia.RadialMenu.Controls;assembly=Avalonia.RadialMenu"
-        xmlns:radialMenuDemo="clr-namespace:RadialMenuDemo"
+        xmlns:radialMenu="clr-namespace:Avalonia.RadialMenu.Controls;assembly=Avalonia.RadialMenu"
         xmlns:material="using:Material.Icons.Avalonia"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RadialMenuDemo.MainWindow"
         Title="RadialMenuDemo">
@@ -33,95 +31,91 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        
+
         <WrapPanel HorizontalAlignment="Center" Grid.Row="0">
             <Button Content="Open" Command="{Binding OpenMenu}" HorizontalAlignment="Center"
                     VerticalAlignment="Center" Padding="40 10" Margin="10" />
             <Button Content="Close" Command="{Binding CloseMenu}" HorizontalAlignment="Center"
                     VerticalAlignment="Center" Padding="40 10" Margin="10" />
             <CheckBox Content="Shift Items" Padding="40 10" Margin="10" IsChecked="{Binding IsShifted}"
-                      HorizontalAlignment="Center" VerticalAlignment="Center">
-            </CheckBox>
+                      HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Content="Last Piece Pressed" Padding="40 10" Margin="10"
-                   HorizontalAlignment="Center" VerticalAlignment="Center">
-            </Label>
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Content="{Binding LastPressed}" Padding="40 10" Margin="10"
-                   HorizontalAlignment="Center" VerticalAlignment="Center">
-            </Label>
-        
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+
         </WrapPanel>
-        
+
         <Canvas x:Name="canvas" Grid.Row="1" PointerPressed="Canvas_OnPointerPressed" Background="Transparent">
-        
-            <RadialMenu:RadialMenu HalfShiftedItems="{Binding IsShifted}" Canvas.Top="{Binding Location.Y}"
+
+            <radialMenu:RadialMenu HalfShiftedItems="{Binding IsShifted}" Canvas.Top="{Binding Location.Y}"
                                    Canvas.Left="{Binding Location.X}" x:Name="radialMenu" IsOpen="{Binding IsOpen}">
-        
-                <RadialMenu:RadialMenu.CentralItem>
-                    <RadialMenu:RadialMenuCentralItem Command="{Binding CloseMenu}"
-                                                      Content="{DynamicResource appbar_close}">
-                    </RadialMenu:RadialMenuCentralItem>
-                </RadialMenu:RadialMenu.CentralItem>
-        
-                <RadialMenu:RadialMenu.MenuContent>
-        
-                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="1">
+
+                <radialMenu:RadialMenu.CentralItem>
+                    <radialMenu:RadialMenuCentralItem Command="{Binding CloseMenu}"
+                                                      Content="{DynamicResource appbar_close}" />
+                </radialMenu:RadialMenu.CentralItem>
+
+                <radialMenu:RadialMenu.MenuContent>
+
+                    <radialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="1">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:MaterialIcon Kind="Add"></material:MaterialIcon>
+                            <material:MaterialIcon Kind="Add" />
                             <TextBlock FontSize="14" TextAlignment="Center">
                                 Add
                             </TextBlock>
                         </WrapPanel>
-                    </RadialMenu:RadialMenuItem>
-        
-                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="2">
+                    </radialMenu:RadialMenuItem>
+
+                    <radialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="2">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:MaterialIcon Kind="Edit"></material:MaterialIcon>
+                            <material:MaterialIcon Kind="Edit" />
                             <TextBlock FontSize="14" TextAlignment="Center">
                                 Edit
                             </TextBlock>
                         </WrapPanel>
-                    </RadialMenu:RadialMenuItem>
-        
-                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="3">
+                    </radialMenu:RadialMenuItem>
+
+                    <radialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="3">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:MaterialIcon Kind="ContentSave"></material:MaterialIcon>
+                            <material:MaterialIcon Kind="ContentSave" />
                             <TextBlock FontSize="14" TextAlignment="Center">
                                 Save
                             </TextBlock>
                         </WrapPanel>
-                    </RadialMenu:RadialMenuItem>
-        
-                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="4">
+                    </radialMenu:RadialMenuItem>
+
+                    <radialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="4">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:MaterialIcon Kind="Delete"></material:MaterialIcon>
+                            <material:MaterialIcon Kind="Delete" />
                             <TextBlock FontSize="14" TextAlignment="Center">
                                 Delete
                             </TextBlock>
                         </WrapPanel>
-                    </RadialMenu:RadialMenuItem>
-        
-                    <RadialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="5">
+                    </radialMenu:RadialMenuItem>
+
+                    <radialMenu:RadialMenuItem Command="{Binding Pressed}" CommandParameter="5">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:MaterialIcon Kind="FilePlus"></material:MaterialIcon>
+                            <material:MaterialIcon Kind="FilePlus" />
                             <TextBlock FontSize="14" TextAlignment="Center">
                                 New Page
                             </TextBlock>
                         </WrapPanel>
-                    </RadialMenu:RadialMenuItem>
-        
-                    <RadialMenu:RadialMenuItem IsEnabled="False" Command="{Binding Pressed}" CommandParameter="6">
+                    </radialMenu:RadialMenuItem>
+
+                    <radialMenu:RadialMenuItem IsEnabled="False" Command="{Binding Pressed}" CommandParameter="6">
                         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:MaterialIcon Kind="Share"></material:MaterialIcon>
+                            <material:MaterialIcon Kind="Share" />
                             <TextBlock FontSize="14" TextAlignment="Center">
                                 Share
                             </TextBlock>
                         </WrapPanel>
-                    </RadialMenu:RadialMenuItem>
-        
-                </RadialMenu:RadialMenu.MenuContent>
-        
-            </RadialMenu:RadialMenu>
-        
+                    </radialMenu:RadialMenuItem>
+
+                </radialMenu:RadialMenu.MenuContent>
+
+            </radialMenu:RadialMenu>
+
         </Canvas>
     </Grid>
 

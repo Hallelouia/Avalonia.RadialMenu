@@ -12,10 +12,14 @@ namespace RadialMenuDemo;
 
 public class MainViewModel : ReactiveObject
 {
-    List<Button> _buttons = new List<Button>() { new Button() {Content = "A"}, new Button() {Content = "A"}, new Button() {Content = "A"}, new Button() {Content = "A"}, new Button() {Content = "A"}, };
+    private List<Button> _buttons = new()
+    {
+        new Button() { Content = "A" }, new Button() { Content = "A" }, new Button() { Content = "A" },
+        new Button() { Content = "A" }, new Button() { Content = "A" }
+    };
 
-    
-    List<Button> Buttons => _buttons;
+
+    private List<Button> Buttons => _buttons;
 
     private ReactiveCommand<Unit, Unit> CloseRadialMenu { get; }
     private ReactiveCommand<Unit, Unit> OpenRadialMenu { get; }
@@ -39,6 +43,7 @@ public class MainViewModel : ReactiveObject
     }
 
     private bool _isShifted = false;
+
     public bool IsShifted
     {
         get => _isShifted;
