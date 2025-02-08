@@ -12,8 +12,7 @@ namespace Avalonia.RadialMenu.Controls;
 public class RadialMenuItem : Button
 {
     public static readonly StyledProperty<int> IndexProperty =
-        AvaloniaProperty.Register<RadialMenuItem, int>(nameof(Index), 0, false, BindingMode.Default, null, null,
-            UpdateItemRendering);
+        AvaloniaProperty.Register<RadialMenuItem, int>(nameof(Index), 0, false, BindingMode.Default, null, null, false);
 
     public int Index
     {
@@ -22,8 +21,7 @@ public class RadialMenuItem : Button
     }
 
     public static readonly StyledProperty<int> CountProperty =
-        AvaloniaProperty.Register<RadialMenuItem, int>(nameof(Count), 1, false, BindingMode.Default, null, null,
-            UpdateItemRendering);
+        AvaloniaProperty.Register<RadialMenuItem, int>(nameof(Count), 1, false, BindingMode.Default, null, null, false);
 
     public int Count
     {
@@ -33,7 +31,7 @@ public class RadialMenuItem : Button
 
     public static readonly StyledProperty<bool> HalfShiftedProperty =
         AvaloniaProperty.Register<RadialMenuItem, bool>(nameof(HalfShifted), false, false, BindingMode.Default, null,
-            null, UpdateItemRendering);
+            null, false);
 
     public bool HalfShifted
     {
@@ -123,10 +121,10 @@ public class RadialMenuItem : Button
         set => SetValue(EdgePaddingProperty, value);
     }
 
-    public static readonly StyledProperty<Brush?> EdgeBackgroundProperty =
-        AvaloniaProperty.Register<RadialMenuItem, Brush?>(nameof(EdgeBackground), null);
+    public static readonly StyledProperty<IBrush?> EdgeBackgroundProperty =
+        AvaloniaProperty.Register<RadialMenuItem, IBrush?>(nameof(EdgeBackground), null);
 
-    public Brush? EdgeBackground
+    public IBrush? EdgeBackground
     {
         get => GetValue(EdgeBackgroundProperty);
         set => SetValue(EdgeBackgroundProperty, value);
@@ -141,19 +139,19 @@ public class RadialMenuItem : Button
         set => SetValue(EdgeBorderThicknessProperty, value);
     }
 
-    public static readonly StyledProperty<Brush?> EdgeBorderBrushProperty =
-        AvaloniaProperty.Register<RadialMenuItem, Brush?>(nameof(EdgeBorderBrush), null);
+    public static readonly StyledProperty<IBrush?> EdgeBorderBrushProperty =
+        AvaloniaProperty.Register<RadialMenuItem, IBrush?>(nameof(EdgeBorderBrush), null);
 
-    public Brush? EdgeBorderBrush
+    public IBrush? EdgeBorderBrush
     {
         get => GetValue(EdgeBorderBrushProperty);
         set => SetValue(EdgeBorderBrushProperty, value);
     }
 
-    public static readonly StyledProperty<Brush?> ArrowBackgroundProperty =
-        AvaloniaProperty.Register<RadialMenuItem, Brush?>(nameof(ArrowBackground), null);
+    public static readonly StyledProperty<IBrush?> ArrowBackgroundProperty =
+        AvaloniaProperty.Register<RadialMenuItem, IBrush?>(nameof(ArrowBackground), null);
 
-    public Brush? ArrowBackground
+    public IBrush? ArrowBackground
     {
         get => GetValue(ArrowBackgroundProperty);
         set => SetValue(ArrowBackgroundProperty, value);
@@ -168,10 +166,10 @@ public class RadialMenuItem : Button
         set => SetValue(ArrowBorderThicknessProperty, value);
     }
 
-    public static readonly StyledProperty<Brush?> ArrowBorderBrushProperty =
-        AvaloniaProperty.Register<RadialMenuItem, Brush?>(nameof(ArrowBorderBrush), null);
+    public static readonly StyledProperty<IBrush?> ArrowBorderBrushProperty =
+        AvaloniaProperty.Register<RadialMenuItem, IBrush?>(nameof(ArrowBorderBrush), null);
 
-    public Brush? ArrowBorderBrush
+    public IBrush? ArrowBorderBrush
     {
         get => GetValue(ArrowBorderBrushProperty);
         set => SetValue(ArrowBorderBrushProperty, value);
@@ -233,19 +231,22 @@ public class RadialMenuItem : Button
 
     static RadialMenuItem()
     {
+        AffectsArrange<RadialMenuItem>(IndexProperty);
+        AffectsArrange<RadialMenuItem>(CountProperty);
+        AffectsArrange<RadialMenuItem>(HalfShiftedProperty);
     }
 
-    private static void UpdateItemRendering(IAvaloniaObject d, bool e)
+    protected override void ArrangeCore(Rect finalRect)
     {
-        if (d is not RadialMenuItem item) return;
-
-        var angleDelta = 360.0 / item.Count;
-        var angleShift = item.HalfShifted ? -angleDelta / 2 : 0;
-        var startAngle = angleDelta * item.Index + angleShift;
+        var angleDelta = 360.0 / Count;
+        var angleShift = HalfShifted ? -angleDelta / 2 : 0;
+        var startAngle = angleDelta * Index + angleShift;
         var rotation = startAngle + angleDelta / 2;
 
-        item.AngleDelta = angleDelta;
-        item.StartAngle = startAngle;
-        item.Rotation = rotation;
+        AngleDelta = angleDelta;
+        StartAngle = startAngle;
+        Rotation = rotation;
+
+        base.ArrangeCore(finalRect);
     }
 }

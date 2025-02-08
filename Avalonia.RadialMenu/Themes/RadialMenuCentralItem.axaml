@@ -1,27 +1,27 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Controls="clr-namespace:Avalonia.RadialMenu.Controls">
+    xmlns:controls="clr-namespace:Avalonia.RadialMenu.Controls">
 
     <!-- RadialMenuCentralItem style when overed -->
-    <Style Selector="Controls|RadialMenuCentralItem:pointerover">
+    <Style Selector="controls|RadialMenuCentralItem:pointerover">
         <Setter Property="BorderBrush" Value="#999" />
-        <Setter Property="Panel.ZIndex" Value="10" />
+        <Setter Property="ZIndex" Value="10" />
     </Style>
 
     <!-- RadialMenuCentralItem style when pressed -->
-    <Style Selector="Controls|RadialMenuCentralItem[IsPressed=True]">
+    <Style Selector="controls|RadialMenuCentralItem[IsPressed=True]">
         <Setter Property="BorderBrush" Value="#666" />
-        <Setter Property="Panel.ZIndex" Value="10" />
+        <Setter Property="ZIndex" Value="10" />
     </Style>
 
     <!-- RadialMenuCentralItem style when disabled -->
-    <Style Selector="Controls|RadialMenuCentralItem[IsEnabled=False]">
+    <Style Selector="controls|RadialMenuCentralItem[IsEnabled=False]">
         <Setter Property="BorderBrush" Value="#F3F3F3" />
         <Setter Property="Foreground" Value="#AFAFAF" />
     </Style>
 
-    <Style Selector="Controls|RadialMenuCentralItem">
+    <Style Selector="controls|RadialMenuCentralItem">
 
 
         <!-- Default RadialMenuCentralItem style -->
@@ -33,19 +33,19 @@
         <Setter Property="Foreground" Value="#111" />
         <Setter Property="BorderBrush" Value="#CCC" />
         <Setter Property="BorderThickness" Value="2" />
-        <Setter Property="Panel.ZIndex" Value="0" />
+        <Setter Property="ZIndex" Value="0" />
 
         <!-- RadialMenuCentralItem template -->
         <Setter Property="Template">
             <Setter.Value>
 
-                <ControlTemplate TargetType="Controls:RadialMenuCentralItem">
+                <ControlTemplate TargetType="controls:RadialMenuCentralItem">
                     <Grid>
 
                         <!-- Rounded button -->
                         <Ellipse
                             Stroke="{TemplateBinding BorderBrush}"
-                            StrokeThickness="{Binding BorderThickness.Top, RelativeSource={RelativeSource AncestorType=Controls:RadialMenuCentralItem}}"
+                            StrokeThickness="{Binding BorderThickness.Top, RelativeSource={RelativeSource AncestorType=controls:RadialMenuCentralItem}}"
                             Fill="{TemplateBinding Background}" />
 
                         <!-- Content -->
